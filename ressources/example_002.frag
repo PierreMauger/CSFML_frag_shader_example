@@ -5,11 +5,8 @@ uniform float time;
 void main(void)
 {
     vec2 coord = gl_TexCoord[0].xy;
-
-    float factorx = 0.02 * (1 + cos(5. * time));
-    float factory = 0.02 * (1 - cos(5. * time));
-    coord.x = (coord.x + factorx) / (1. + 2. * factorx);
-    coord.y = (coord.y + factory) / (1. + 2. * factory);
+    coord.x += sin(radians(500 * time + coord.y * 500)) * 0.02;
+    coord.y += cos(radians(500 * time + coord.x * 250)) * 0.03;
     vec4 pixel_color = texture2D(currentTexture, coord);
 
     gl_FragColor = pixel_color;
