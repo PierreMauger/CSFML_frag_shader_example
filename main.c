@@ -49,8 +49,8 @@ int main()
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
         }
-        seconds = sfClock_getElapsedTime(time).microseconds / 1000000.0;
-        sfShader_setFloatParameter(shader, "time", seconds);
+        seconds += sfTime_asSeconds(sfClock_restart(time));
+        sfShader_setFloatUniform(shader, "time", seconds);
         sfRenderWindow_clear(window, sfColor_fromRGB(127, 127, 127));
         sfSprite_setPosition(sprite, (sfVector2f){WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2});
         sfRenderWindow_drawSprite(window, sprite, &states);
