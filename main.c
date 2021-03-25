@@ -2,9 +2,10 @@
 #include <math.h>
 
 //#define SHADER_NAME     "./ressources/example_001.frag"
-#define SHADER_NAME     "./ressources/example_002.frag"
+//#define SHADER_NAME     "./ressources/example_002.frag"
 //#define SHADER_NAME     "./ressources/example_003.frag"
-//define SHADER_NAME     "./ressources/example_004.frag"
+//#define SHADER_NAME     "./ressources/example_004.frag"
+#define SHADER_NAME     "./ressources/example_005.frag"
 #define IMAGE_NAME      "./ressources/image.png"
 #define WINDOW_WIDTH    500
 #define WINDOW_HEIGHT   500

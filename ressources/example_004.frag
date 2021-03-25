@@ -7,5 +7,6 @@ void main() {
     vec4 pixel_color = texture2D(currentTexture, coord);
     float alpha = 0.5 + 0.5 * cos(2 * time);
 
-    gl_FragColor = vec4(pixel_color.xyz, min(alpha, pixel_color.w));
+    pixel_color.z = min(alpha, pixel_color.z);
+    gl_FragColor = pixel_color;
 }
