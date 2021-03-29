@@ -5,7 +5,8 @@
 //#define SHADER_NAME     "./ressources/example_002.frag"
 //#define SHADER_NAME     "./ressources/example_003.frag"
 //#define SHADER_NAME     "./ressources/example_004.frag"
-#define SHADER_NAME     "./ressources/example_005.frag"
+//#define SHADER_NAME     "./ressources/example_005.frag"
+#define SHADER_NAME     "./ressources/example_007.frag"
 #define IMAGE_NAME      "./ressources/image.png"
 #define WINDOW_WIDTH    500
 #define WINDOW_HEIGHT   500
@@ -52,8 +53,8 @@ int main()
         }
         seconds += sfTime_asSeconds(sfClock_restart(time));
         sfShader_setFloatUniform(shader, "time", seconds);
-        sfRenderWindow_clear(window, sfColor_fromRGB(127, 127, 127));
         sfSprite_setPosition(sprite, (sfVector2f){WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2});
+        sfRenderWindow_clear(window, sfColor_fromRGB(127, 127, 127));
         sfRenderWindow_drawSprite(window, sprite, &states);
         sfRenderWindow_display(window);
     }
