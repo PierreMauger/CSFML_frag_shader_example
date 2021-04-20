@@ -3,13 +3,13 @@
 
 //#define SHADER_NAME     "./ressources/example_001.frag"
 //#define SHADER_NAME     "./ressources/example_002.frag"
-//#define SHADER_NAME     "./ressources/example_003.frag"
+#define SHADER_NAME     "./ressources/example_010.frag"
 //#define SHADER_NAME     "./ressources/example_004.frag"
 //#define SHADER_NAME     "./ressources/example_005.frag"
-#define SHADER_NAME     "./ressources/example_007.frag"
+//#define SHADER_NAME     "./ressources/example_007.frag"
 #define IMAGE_NAME      "./ressources/image.png"
-#define WINDOW_WIDTH    500
-#define WINDOW_HEIGHT   500
+#define WINDOW_WIDTH    1000
+#define WINDOW_HEIGHT   1000
 
 sfRenderWindow *create_my_window(unsigned int width, unsigned int height)
 {
@@ -29,7 +29,10 @@ int main()
 {
     sfRenderWindow *window = create_my_window(WINDOW_WIDTH, WINDOW_HEIGHT);
     sfTexture *tex = sfTexture_createFromFile(IMAGE_NAME, NULL);
+    const sfTexture *temp;
+    sfSprite *stemp = sfSprite_create();
     sfSprite *sprite = sfSprite_create();
+    sfRenderTexture *buffer = sfRenderTexture_create(WINDOW_WIDTH, WINDOW_HEIGHT, sfFalse);
     sfFloatRect sprite_size = {0, 0, 0, 0};
     sfShader *shader = sfShader_createFromFile(NULL, NULL, SHADER_NAME);
     sfClock *time = sfClock_create();
@@ -52,10 +55,23 @@ int main()
                 sfRenderWindow_close(window);
         }
         seconds += sfTime_asSeconds(sfClock_restart(time));
+        //for shader 10
+        if (sfMouse_isButtonPressed(sfMouseLeft))
+            sfShader_setFloatUniform(shader, "glowness", 0.8);
+        else
+            sfShader_setFloatUniform(shader, "glowness", 0.5);
+        sfShader_setFloatUniform(shader, "mouse_x", sfMouse_getPositionRenderWindow(window).x);
+        sfShader_setFloatUniform(shader, "mouse_y", sfMouse_getPositionRenderWindow(window).y);
+        sfShader_setFloatUniform(shader, "height", seconds);
+        //for shader 10
         sfShader_setFloatUniform(shader, "time", seconds);
         sfSprite_setPosition(sprite, (sfVector2f){WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2});
-        sfRenderWindow_clear(window, sfColor_fromRGB(127, 127, 127));
-        sfRenderWindow_drawSprite(window, sprite, &states);
+        sfRenderTexture_clear(buffer, sfColor_fromRGBA(127, 127, 127, 255));
+        sfRenderTexture_drawSprite(buffer, sprite, NULL);
+        sfRenderTexture_display(buffer);
+        temp = sfRenderTexture_getTexture(buffer);
+        sfSprite_setTexture(stemp, temp, sfFalse);
+        sfRenderWindow_drawSprite(window, stemp, &states);
         sfRenderWindow_display(window);
     }
     return 0;
