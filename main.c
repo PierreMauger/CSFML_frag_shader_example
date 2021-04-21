@@ -3,7 +3,7 @@
 
 //#define SHADER_NAME     "./ressources/example_001.frag"
 //#define SHADER_NAME     "./ressources/example_002.frag"
-#define SHADER_NAME     "./ressources/example_010.frag"
+#define SHADER_NAME     "./ressources/example_012.frag"
 //#define SHADER_NAME     "./ressources/example_004.frag"
 //#define SHADER_NAME     "./ressources/example_005.frag"
 //#define SHADER_NAME     "./ressources/example_007.frag"
@@ -56,13 +56,13 @@ int main()
         }
         seconds += sfTime_asSeconds(sfClock_restart(time));
         //for shader 10
-        if (sfMouse_isButtonPressed(sfMouseLeft))
-            sfShader_setFloatUniform(shader, "glowness", 0.8);
-        else
-            sfShader_setFloatUniform(shader, "glowness", 0.5);
-        sfShader_setFloatUniform(shader, "mouse_x", sfMouse_getPositionRenderWindow(window).x);
-        sfShader_setFloatUniform(shader, "mouse_y", sfMouse_getPositionRenderWindow(window).y);
-        sfShader_setFloatUniform(shader, "height", seconds);
+        // if (sfMouse_isButtonPressed(sfMouseLeft))
+        //     sfShader_setFloatUniform(shader, "glowness", 0.8);
+        // else
+        //     sfShader_setFloatUniform(shader, "glowness", 0.5);
+        // sfShader_setFloatUniform(shader, "mouse_x", sfMouse_getPositionRenderWindow(window).x);
+        // sfShader_setFloatUniform(shader, "mouse_y", sfMouse_getPositionRenderWindow(window).y);
+        // sfShader_setFloatUniform(shader, "height", 3);
         //for shader 10
         sfShader_setFloatUniform(shader, "time", seconds);
         sfSprite_setPosition(sprite, (sfVector2f){WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2});
