@@ -5,7 +5,9 @@
 ## Main Makefile
 ##
 
-SRC 			=
+SRC 			=	src/engine.c			\
+					src/shader.c			\
+					src/time_elapsed.c		\
 
 SRC				+=	main.c
 
