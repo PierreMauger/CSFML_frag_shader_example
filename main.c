@@ -1,15 +1,21 @@
-#include <SFML/Graphics.h>
-#include <math.h>
+/*
+** SHADER_VIEWER PROJECT
+** MAY 2021
+** File description:
+** main
+*/
+
+#include "shader.h"
 
 //#define SHADER_NAME     "./ressources/example_001.frag"
 //#define SHADER_NAME     "./ressources/example_002.frag"
-#define SHADER_NAME     "./ressources/example_012.frag"
+#define SHADER_NAME     "./ressources/example_011.frag"
 //#define SHADER_NAME     "./ressources/example_004.frag"
 //#define SHADER_NAME     "./ressources/example_005.frag"
 //#define SHADER_NAME     "./ressources/example_007.frag"
 #define IMAGE_NAME      "./ressources/image.png"
-#define WINDOW_WIDTH    1000
-#define WINDOW_HEIGHT   1000
+#define WINDOW_WIDTH    1080
+#define WINDOW_HEIGHT   540
 
 sfRenderWindow *create_my_window(unsigned int width, unsigned int height)
 {
