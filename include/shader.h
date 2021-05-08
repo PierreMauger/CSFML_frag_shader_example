@@ -19,9 +19,9 @@
 
 typedef struct {
     sfRenderStates states;
-    sfShader *tab[4];
-    // const sfTexture *text;
-    // sfSprite *sprite;
+    sfShader *tab[11];
+    const sfTexture *texture;
+    sfSprite *sprite;
 } shader_t;
 
 typedef struct {
@@ -30,9 +30,16 @@ typedef struct {
 } time_elapsed_t;
 
 typedef struct {
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfFloatRect sprite_size;
+} image_t;
+
+typedef struct {
     sfRenderWindow *window;
     sfRenderTexture *buffer;
     sfEvent event;
+    image_t *image;
     shader_t *shader;
     time_elapsed_t *time;
     int curr;
@@ -46,7 +53,10 @@ time_elapsed_t *init_time(void);
 void destroy_time(time_elapsed_t *time);
 
 shader_t *init_shader(void);
+void change_shader(engine_t *engine);
 void destroy_shader(shader_t *shader);
 
+image_t *init_image(void);
+void destroy_image(image_t *image);
 
 #endif // SHADER_H

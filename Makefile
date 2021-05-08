@@ -8,6 +8,7 @@
 SRC 			=	src/engine.c			\
 					src/shader.c			\
 					src/time_elapsed.c		\
+					src/image.c				\
 
 SRC				+=	main.c
 

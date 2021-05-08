@@ -29,12 +29,14 @@ engine_t *init_engine(void)
     engine->buffer = sfRenderTexture_create(W_WIDTH, W_HEIGHT, sfFalse);
     engine->shader = init_shader();
     engine->time = init_time();
+    engine->image = init_image();
     engine->curr = 0;
     return engine;
 }
 
 void destroy_engine(engine_t *engine)
 {
+    destroy_image(engine->image);
     destroy_time(engine->time);
     destroy_shader(engine->shader);
     sfRenderWindow_destroy(engine->window);

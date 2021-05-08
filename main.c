@@ -7,26 +7,46 @@
 
 #include "shader.h"
 
+void event_loop(engine_t *engine)
+{
+    while (sfRenderWindow_pollEvent(engine->window, &engine->event)) {
+        if (engine->event.type == sfEvtClosed)
+            sfRenderWindow_close(engine->window);
+        if (engine->event.type == sfEvtKeyPressed) {
+            if (engine->event.key.code == sfKeyLeft && engine->curr)
+                engine->curr -= 1;
+            if (engine->event.key.code == sfKeyRight && engine->curr < 10)
+                engine->curr += 1;
+            change_shader(engine);
+        }
+    }
+}
+
+void draw_all(engine_t *engine)
+{
+        sfRenderTexture_clear(engine->buffer, sfColor_fromRGBA(127, 127, 127, 255));
+        sfRenderTexture_drawSprite(engine->buffer, engine->image->sprite, NULL);
+        sfRenderTexture_display(engine->buffer);
+        engine->shader->texture = sfRenderTexture_getTexture(engine->buffer);
+        sfSprite_setTexture(engine->shader->sprite, engine->shader->texture, sfFalse);
+        sfRenderWindow_drawSprite(engine->window, engine->shader->sprite, &engine->shader->states);
+        sfRenderWindow_display(engine->window);
+}
+
 int main(void)
 {
     engine_t *engine = init_engine();
 
-    sfTexture *tex = sfTexture_createFromFile(IMAGE_NAME, NULL);
-    const sfTexture *temp;
-    sfSprite *stemp = sfSprite_create();
-    sfSprite *sprite = sfSprite_create();
-    sfFloatRect sprite_size = {0};
-
-    sfTexture_setSmooth(tex, sfTrue);
-    sfSprite_setTexture(sprite, tex, sfTrue);
-    sprite_size = sfSprite_getGlobalBounds(sprite);
-    sfSprite_setOrigin(sprite, (sfVector2f){sprite_size.width / 2, sprite_size.height / 2});
     while (sfRenderWindow_isOpen(engine->window)) {
-        while (sfRenderWindow_pollEvent(engine->window, &engine->event)) {
-            if (engine->event.type == sfEvtClosed)
-                sfRenderWindow_close(engine->window);
-        }
+        event_loop(engine);
         engine->time->seconds += sfTime_asSeconds(sfClock_restart(engine->time->clock));
+        sfShader_setFloatUniform(engine->shader->tab[engine->curr], "time", engine->time->seconds);
+        draw_all(engine);
+    }
+    destroy_engine(engine);
+    return 0;
+}
+
         //for shader 10
         // if (sfMouse_isButtonPressed(sfMouseLeft))
         //     sfShader_setFloatUniform(shader, "glowness", 0.8);
@@ -36,19 +56,3 @@ int main(void)
         // sfShader_setFloatUniform(shader, "mouse_y", sfMouse_getPositionRenderWindow(window).y);
         // sfShader_setFloatUniform(shader, "height", 3);
         //for shader 10
-        sfShader_setFloatUniform(engine->shader->tab[0], "time", engine->time->seconds);
-        sfSprite_setPosition(sprite, (sfVector2f){W_WIDTH / 2, W_HEIGHT / 2});
-        sfRenderTexture_clear(engine->buffer, sfColor_fromRGBA(127, 127, 127, 255));
-        sfRenderTexture_drawSprite(engine->buffer, sprite, NULL);
-        sfRenderTexture_display(engine->buffer);
-        temp = sfRenderTexture_getTexture(engine->buffer);
-        sfSprite_setTexture(stemp, temp, sfFalse);
-        sfRenderWindow_drawSprite(engine->window, stemp, &engine->shader->states);
-        sfRenderWindow_display(engine->window);
-    }
-    destroy_engine(engine);
-    sfSprite_destroy(sprite);
-    sfSprite_destroy(stemp);
-    sfTexture_destroy(tex);
-    return 0;
-}

@@ -12,6 +12,14 @@ static const char *shader_list[] =
     "./ressources/example_001.frag",
     "./ressources/example_002.frag",
     "./ressources/example_003.frag",
+    "./ressources/example_004.frag",
+    "./ressources/example_005.frag",
+    "./ressources/example_006.frag",
+    "./ressources/example_007.frag",
+    "./ressources/example_008.frag",
+    "./ressources/example_009.frag",
+    "./ressources/example_011.frag",
+    "./ressources/example_012.frag",
     NULL
 };
 
@@ -29,7 +37,13 @@ shader_t *init_shader(void)
         .transform = sfTransform_Identity,
         .texture = NULL,
     };
+    shader->sprite = sfSprite_create();
     return shader;
+}
+
+void change_shader(engine_t *engine)
+{
+    engine->shader->states.shader = engine->shader->tab[engine->curr];
 }
 
 void destroy_shader(shader_t *shader)
