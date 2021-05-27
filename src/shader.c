@@ -48,7 +48,8 @@ void change_shader(engine_t *engine)
 
 void destroy_shader(shader_t *shader)
 {
-    for (int i = 0; shader->tab[i]; i++)
+    for (int i = 0; shader_list[i] != NULL; i++) {
         sfShader_destroy(shader->tab[i]);
+    }
     free(shader);
 }

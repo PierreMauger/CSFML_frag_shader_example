@@ -24,13 +24,13 @@ void event_loop(engine_t *engine)
 
 void draw_all(engine_t *engine)
 {
-        sfRenderTexture_clear(engine->buffer, sfColor_fromRGBA(127, 127, 127, 255));
-        sfRenderTexture_drawSprite(engine->buffer, engine->image->sprite, NULL);
-        sfRenderTexture_display(engine->buffer);
-        engine->shader->texture = sfRenderTexture_getTexture(engine->buffer);
-        sfSprite_setTexture(engine->shader->sprite, engine->shader->texture, sfFalse);
-        sfRenderWindow_drawSprite(engine->window, engine->shader->sprite, &engine->shader->states);
-        sfRenderWindow_display(engine->window);
+    sfRenderTexture_clear(engine->buffer, sfColor_fromRGBA(127, 127, 127, 255));
+    sfRenderTexture_drawSprite(engine->buffer, engine->image->sprite, NULL);
+    sfRenderTexture_display(engine->buffer);
+    engine->shader->texture = sfRenderTexture_getTexture(engine->buffer);
+    sfSprite_setTexture(engine->shader->sprite, engine->shader->texture, sfFalse);
+    sfRenderWindow_drawSprite(engine->window, engine->shader->sprite, &engine->shader->states);
+    sfRenderWindow_display(engine->window);
 }
 
 int main(void)

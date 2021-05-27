@@ -31,6 +31,7 @@ engine_t *init_engine(void)
     engine->time = init_time();
     engine->image = init_image();
     engine->curr = 0;
+    engine->event = (sfEvent){0};
     return engine;
 }
 
